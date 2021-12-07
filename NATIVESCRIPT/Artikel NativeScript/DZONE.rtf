@@ -1,0 +1,265 @@
+{\rtf1\ansi\ansicpg1252\cocoartf1561\cocoasubrtf600
+{\fonttbl\f0\froman\fcharset0 Times-Roman;\f1\fswiss\fcharset0 Helvetica;\f2\fmodern\fcharset0 CourierNewPSMT;
+\f3\fmodern\fcharset0 CourierNewPS-BoldMT;}
+{\colortbl;\red255\green255\blue255;\red25\green25\blue25;\red255\green255\blue255;\red68\green84\blue106;
+\red0\green0\blue0;\red38\green38\blue38;\red27\green31\blue34;\red21\green23\blue26;}
+{\*\expandedcolortbl;;\cssrgb\c12941\c12941\c12941;\cssrgb\c100000\c100000\c100000;\csgenericrgb\c26667\c32941\c41569;
+\cssrgb\c0\c0\c0\c84314;\cssrgb\c20000\c20000\c20000;\cssrgb\c14118\c16078\c18039;\cssrgb\c10588\c12157\c13725\c4706;}
+\paperw11900\paperh16840\margl1440\margr1440\vieww20900\viewh10120\viewkind0
+\deftab720
+\pard\pardeftab720\sl480\partightenfactor0
+
+\f0\fs32 \cf2 \cb3 \expnd0\expndtw0\kerning0
+\outl0\strokewidth0 \strokec2 Building Mobile apps with Angular and NativeScript \{N\}\
+\
+More and more Java developers are coming into contact with front-end development in recent years. For this group of developers it is only a small step to switch to mobile app development with NativeScript. In this document we try to clarify the possibilities of native hybrid app development using NativeScript.\
+\
+What is NativeScript \{N\}?\
+\{N\} is an open source framework (under the Apache 2 license) to build native IOS and Android apps, using Typescript and Angular. \{N\} is a different technology than the hybrid frameworks, such as Ionic and Phonegap. \{N\} is a runtime, not a web technology. Your app will not run as a mini website in a WebView and is therefore more efficient. With \{N\} you have direct access to all the Native APIs of your device.\
+\
+TypeScript:\
+For Java programmers it is interesting to realize that TypeScript (TS) has many similarities with Java. You can code which you wonder if it is TS or Java. TS is the best way to write \{N\} apps, whether or not combined with Angular. And further, writing native code in TS for Android is quite simple, because you can take on a lot of one-to-one in the native Java code (for example: new io.java.File () is both valid Java and JS / TS. That is just a bit trickier at Objective C). It is actually very fascinating to see how NativeScript manages to implement all native constructions with pure JavaScript. From String Arrays to interfaces and implementation of abstract classes.\
+\
+Why NativeScript?\
+\'95 One of the arguments to use NativeScript \{N\} is the reuse of 'Skills'. That is, someone with knowledge of JavaScript / Typescript can immediately start with \{N\}. \{N\} is written in JavaScript or Typescript.\
+\
+\'95 Reuse of code. Write Native Mobile apps for iOS and Android with a single code base and a common interface. This is not the case with Xamarin, for example, where you have to build two interfaces for IOS and Android with one common layer. It is not surprising that the slogan of \{N\} is: 'Write ones, run everywhere'.\
+\
+\'95 It is also easy to expand with the help of \{N\} modules (see the examples in this article) and npm modules. Actually the plug-ins from Cordoba / Phonegap\
+\
+\'95 Finally, no WebViews are used, as with many hybrid frameworks. With JavaScript you have direct access to the Native APIs and is therefore better performing.\
+\
+What is needed for NativeScript?\
+At https://docs.nativescript.org/start/quick-setup there is a clear description of how \{N\} should be installed. Because this installation does not always work flawlessly, it is wise to install 'NativeScript Sidekick'.\
+With Sidekick it is possible to build apps in the cloud.\
+If you choose to build your apps in the cloud, you can develop your apps independently of your operating system. You can of course even build iOS apps on a Windows machine. It is also possible to work locally with Sidekick, but for that you have to set up your own environment with iOS Xcode and Android SDK. Sidekick still has many known issues but is already working well. The nice thing about \{N\} is also Live Sync. So if you modify a rule in the code, this will even be pushed directly on the phone with the cloudbuild and the result of the change is immediately visible.\
+\
+How does NativeScript work with JavaScript\
+The following is a simple example of JavaScript in \{N\}, which instantiates an Objective-C based IOS UIAlertView control:\
+\
+\pard\pardeftab720\ri-340\partightenfactor0
+
+\f1\i\fs24 \cf0 \cb1 \kerning1\expnd0\expndtw0 \outl0\strokewidth0  
+\f2\i0\fs13 var myAlert = new UIAlertView();\
+ myAlert.message = \'93NativeScript rocks!\'94;\
+\pard\pardeftab720\ri-340\partightenfactor0
+
+\fs16 \cf0  
+\fs13 myAlert.show();\
+\
+\
+\pard\pardeftab720\ri-340\partightenfactor0
+
+\f0\fs32 \cf0 Because web developers do not want to learn iOS and Android specific APIs, \{N\} offers a set of \{N\} modules. These modules abstract the iOS and Android details in simple JavaScript APIs.\
+The above UIAlertView-based code can be rewritten with the \{N\} 'Dialog module':\
+\
+var dialogs = require ("ui / dialogs");\
+dialogs.alert (\{message: "NativeScript rocks!"\});\
+\
+This dialogs.alert() call also provides us with the android.app.AlertDialog for your Android app.\
+\
+\pard\pardeftab720\sl480\partightenfactor0
+\cf2 \cb3 \expnd0\expndtw0\kerning0
+\outl0\strokewidth0 \strokec2 Although this 'dialog' example is simple, the same technique can be used for building robust apps. For this you can use the already existing and mature native iOS and Android UI components.\
+\pard\pardeftab720\ri-340\partightenfactor0
+\cf0 \cb1 \kerning1\expnd0\expndtw0 \outl0\strokewidth0 \
+What can Angular add to NativeScript?\
+\{N\} can now also be written in Angular.\
+If you have knowledge of Angular, it is a small step to use Angular in \{N\}.\
+The big difference with Angular is that the browser-based HTML elements such as <div> and <span> are not available in \{N\}. You should use \{N\} UI components instead.\
+No DOM or browser is used in \{N\}. \{N\} UIs are native UIs and therefore disconnected from the DOM. Because Angular is an agnostic framework and is disconnected from the DOM, this framework can easily be integrated with \{N\}. The example below deals with this.\
+AngularJS, unlike Angular, is not suitable for \{N\} because this framework is linked to the DOM.\
+\
+By using Angular in \{N\}, you have the ability to share code between your existing web application and your Native apps. Let's look at an example\
+\
+\pard\pardeftab720\sl480\partightenfactor0
+\cf2 \cb3 \expnd0\expndtw0\kerning0
+\outl0\strokewidth0 \strokec2 Reuse of code between web and mobile apps\
+As an example, let's show a 'Grocery List' in a web application.\
+\pard\pardeftab720\ri-340\partightenfactor0
+\cf0 \cb1 \kerning1\expnd0\expndtw0 \outl0\strokewidth0 \
+<<Plaatje>>\
+\
+\
+
+\f2\fs13 import \{Component\} from \'91@angular/core';\
+\
+        @Component(\{\
+            selector: \'91grocery-list'\
+            templateUrl: \'91grocerylist.template.html'\
+        \})\
+\
+        export class GroceryListComponent \{\
+            groceries: string[];\
+\
+            constructor()  \{\
+                 this.groceries =[\'91milk, \'91bread\'92]\
+            \}  \
+        \}
+\f1 \
+
+\f0\fs32 Figuur 1\
+\
+\
+In Listing 1 an Angular Component is defined, which fills an array of 'groceries', via the constructor.\
+TypeScript is used. This is a 'typed superset' of JavaScript and is the standard for writing Angular applications.\
+\
+\pard\pardeftab720\sl480\partightenfactor0
+\cf2 \cb3 \expnd0\expndtw0\kerning0
+\outl0\strokewidth0 \strokec2 How does this component work?\
+Via the selector associated with the Component, you can ask Angular to instantiate and render this component, where it finds a <grocery-list> tag in the HTML (see Listing 2).\
+\pard\pardeftab720\ri-340\partightenfactor0
+\cf0 \cb1 \kerning1\expnd0\expndtw0 \outl0\strokewidth0 \
+
+\f2\fs13 \'85.\
+                  <grocery-list></grocery-list>\
+                \'85.\
+
+\f0\fs32 \
+\
+Listing 2\
+\
+In order to render the 'Grocery list', a template has to be defined with the name: grocerylist.template.html (see Listing 3). This template is also defined under the templateUrl of the Component.\
+\
+
+\f2\fs13 <p>Groceries: </p>\
+        <ul>\
+            <li *ng-for = \'93let grocery of groceries">      \
+                       \{\{grocery\}\} \
+            </li>\
+        </ul>
+\fs16  \
+\
+\pard\pardeftab720\ri-340\sa200\partightenfactor0
+
+\f1\i\fs18 \cf4 Listing 3\
+\pard\pardeftab720\ri-340\partightenfactor0
+
+\f0\i0\fs32 \cf0 \
+\
+The list of 'groceries' is iterated, using Angular's ng-for directive.\
+\
+The question now is: what else do we have to program to get the above code working for your NativeScript iOS and Android apps?\
+\
+The comprehensive answer is:\
+The component in Listing 1 remains the same. This TypeScript code can therefore be reused between the web application and mobile apps.\
+The only thing you need to change is the template for this component!\
+\
+You must use \{N\} UI components instead of HTML elements in your template (see Listing 4).\
+What is striking is that you can still use Angular's ng-for directive for iterating through the list.\
+And converting a template to \{N\} UI components is a simple exercise, because there is a Native UI component for every HTML element. This example also shows that Angular is disconnected from the DOM, and can therefore deal with \{N\} UI components.\
+\
+\pard\pardeftab720\fi720\ri-340\partightenfactor0
+
+\f2\fs13 \cf0 <StackLayout *ngFor = "let grocery of groceries">\
+\pard\pardeftab720\ri-340\partightenfactor0
+\cf0     		<Label [text] = \'93grocery"></Label>\
+</StackLayout> \
+\
+\pard\pardeftab720\ri-340\sa200\partightenfactor0
+
+\f1\i\fs18 \cf4 Listing 4\
+\pard\pardeftab720\ri-340\partightenfactor0
+
+\f0\i0\fs32 \cf0 \
+<<plaatje>>\
+\
+\pard\pardeftab720\sl480\partightenfactor0
+\cf2 \cb3 \expnd0\expndtw0\kerning0
+\outl0\strokewidth0 \strokec2 HTTP Module\
+Another example for code reuse is the following.\
+\{N\} provides support for web APIs, such as XMLHttpRequest and fetch ().\
+You can use the HTTP module within \{N\}.\
+This module makes it possible to send web requests and receive web responses.\
+\pard\pardeftab720\ri-340\partightenfactor0
+\cf0 \cb1 \kerning1\expnd0\expndtw0 \outl0\strokewidth0 \
+\
+\pard\pardeftab720\fi720\ri-340\partightenfactor0
+
+\f2\fs13 \cf0 var http = 
+\f3\b require
+\f2\b0 (\'93
+\f3\b http
+\f2\b0 \'94);   
+\f3\b import HTTP module
+\f2\b0 \
+\
+http.getJSON(\'91https://api.groceries.com\'92)\
+\pard\pardeftab720\ri-340\partightenfactor0
+\cf0   	 .then(function (result)) \{\
+     		\'85\
+  	\});\
+
+\f0\fs32 Listing 5\
+\
+\pard\pardeftab720\sl480\partightenfactor0
+\cf2 \cb3 \expnd0\expndtw0\kerning0
+\outl0\strokewidth0 \strokec2 In the diagram below you see on the left that \{N\} translates the XMLHttpRequests web API into Native code for iOS and Android. Also shown on the right side of this diagram is the implementation of the XMLHttpRequest that is used for the web application. This is a different implementation than the NativeScript variant.\
+\pard\pardeftab720\ri-340\partightenfactor0
+\cf0 \cb1 \kerning1\expnd0\expndtw0 \outl0\strokewidth0 \
+<<plaatje>>\
+\
+The problem here is that we can not reuse the XMLHttpRequest implementations between the web application and mobile app. There is a '' missing link '' here, namely a generic HTTP module for the web application and the mobile app.\
+This can be solved with Angular. Angular adds an extra abstraction layer for handling HTTP requests / responses. This is possible with the HTTP module from Angular.\
+We can reuse this module between the web application and the mobile app.\
+\
+\pard\pardeftab720\ri-340\partightenfactor0
+\cf0 <<plaatje>>\
+\
+For example, the code to be reused will look like this in Angular:\
+\
+\pard\pardeftab720\ri-340\partightenfactor0
+
+\f3\b\fs13 \cf0 import  \{Http\} from \'91@angular/http\'92\
+\pard\pardeftab720\ri-340\partightenfactor0
+
+\f2\b0 \cf0 \
+        export class GroceryListService \{\
+          \
+           constructor(private 
+\f3\b http
+\f2\b0 : Http)  \{\}\
+\pard\pardeftab720\li720\fi720\ri-340\partightenfactor0
+\cf0 \
+\pard\pardeftab720\li720\ri-340\partightenfactor0
+\cf0   
+\f3\b getGroceries()\{\
+\pard\pardeftab720\li720\fi720\ri-340\partightenfactor0
+\cf0   return this.http.get(`https://api.groceries.com`)\
+  .map((res:Response) => res.json());\
+\pard\pardeftab720\ri-340\partightenfactor0
+\cf0            \}\
+\pard\pardeftab720\ri-340\partightenfactor0
+
+\f2\b0 \cf0 \
+        \}
+\f1 \
+\pard\pardeftab720\ri-340\partightenfactor0
+
+\f0\fs32 \cf0 Listing 6\
+\
+More tools and features\
+\{N\} besides the above mentioned examples, we also have other features, such as the use of plug-ins, scaffolding and the \{N\} Playground. Furthermore, you can now build a \{N\} app with the Vue.js framework.\
+\
+Plug-ins\
+The interesting thing about \{N\} is that there are many plug-ins available in the marketplace.\
+https://market.nativescript.org. You do not have to build everything yourself. Think of Facebook, fingerprint authentication, 'text to speech', ads with Admob or in-app purchase. If the plug-in is not yet available, it can always be built.\
+\
+NativeScript Playground\
+\{N\} Playground is a tool that makes it easy to build an app using a web interface. See https://play.nativescript.org\
+In addition to the website, two apps must be installed on a device:\
+- Nativescript Playground\
+- Nativescript Preview\
+After scanning the QR code of the https://play.nativescript.org website using the playground app, the app will be installed on the device. With Live Sync all changes will be immediately visible in the app. Super cool.\
+Try it out. With Playground you can easily share your \{N\} code and issues with other developers. It is a means to quickly get started with \{N\} and experience its benefits.\
+\
+Finally\
+Reusing code is a very important challenge for development in general.\
+At this moment you can generate a web application with the Angular CLI. And for \{N\} you use the NativeScript CLI. This is a problem because the CLIs give us no possibility to create one project for the web application and the Native application.\
+Of course it is possible to maintain two separate projects and to copy-paste the shared files between the two projects. This can also be solved by using the following 'seed project' for example: https://github.com/TeamMaestro/angular-native-seed. This allows you to maintain your web application and NativeScript with a single code base.\
+In summary, \{N\} is a powerful framework for building native cross-platform mobile applications with Angular, Vue.js, TypeScript or JavaScript. You have direct access to the Native platform APIs.\
+\{N\} works differently from hybrid frameworks such as Phonegap. But is extremely suitable for web developers. It is better performant and easy to learn.\
+\
+\pard\pardeftab720\sl480\partightenfactor0
+\cf5 \cb3 \expnd0\expndtw0\kerning0
+\outl0\strokewidth0 \strokec5 This is\'a0\cf6 \strokec6 a schematic collection\cf7 \strokec7 \'a0or repository for generating components in NativeScript Angular apps using the Angular CLI.\'a0To generate a new NativeScript Angular project, you can use\'a0\cb8 ng new\cb3 \'a0with\'a0\cb8 @nativescript/schematics\cb3 \'a0specified as the schematics collection.}

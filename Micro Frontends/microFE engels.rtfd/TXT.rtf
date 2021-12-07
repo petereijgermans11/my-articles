@@ -1,0 +1,241 @@
+{\rtf1\ansi\ansicpg1252\cocoartf2580
+\cocoatextscaling0\cocoaplatform0{\fonttbl\f0\froman\fcharset0 Times-Roman;\f1\fnil\fcharset0 HelveticaNeue-Bold;\f2\fswiss\fcharset0 Helvetica;
+\f3\fswiss\fcharset0 Helvetica-Oblique;\f4\fnil\fcharset0 Menlo-Regular;}
+{\colortbl;\red255\green255\blue255;\red26\green28\blue40;\red255\green255\blue255;\red135\green135\blue135;
+\red245\green245\blue245;\red38\green38\blue38;\red242\green242\blue242;}
+{\*\expandedcolortbl;;\cssrgb\c13333\c14902\c20784;\cssrgb\c100000\c100000\c100000;\cssrgb\c60000\c60000\c60000;
+\cssrgb\c96863\c96863\c96863;\cssrgb\c20000\c20000\c20000;\cssrgb\c96078\c96078\c96078;}
+{\*\listtable{\list\listtemplateid1\listhybrid{\listlevel\levelnfc23\levelnfcn23\leveljc0\leveljcn0\levelfollow0\levelstartat1\levelspace360\levelindent0{\*\levelmarker \{disc\}}{\leveltext\leveltemplateid1\'01\uc0\u8226 ;}{\levelnumbers;}\fi-360\li720\lin720 }{\listname ;}\listid1}}
+{\*\listoverridetable{\listoverride\listid1\listoverridecount0\ls1}}
+\paperw11900\paperh16840\margl1440\margr1440\vieww33400\viewh20440\viewkind0
+\deftab720
+\pard\pardeftab720\sa300\partightenfactor0
+
+\f0\fs38 \cf2 \cb3 \expnd0\expndtw0\kerning0
+\outl0\strokewidth0 \strokec2 In recent years, microservices have exploded in popularity. Many organizations use this build to avoid the limitations of large, monolithic backends. While much has been written about this, many companies continue to struggle with \'93monolithic frontends\'94.\
+In this article we will describe a trend that is breaking down "frontend monoliths" into much smaller, more manageable pieces. And how this architecture can increase effectiveness and efficiency across teams. Figure 1 shows an application where the frontend consists of a monolith and the backend consists of several microservices.\
+\pard\pardeftab720\qc\partightenfactor0
+\cf2 \cb1 \
+\pard\pardeftab720\sa300\qc\partightenfactor0
+\cf2 \cb3 figure 1\
+\pard\pardeftab720\sl720\sa100\partightenfactor0
+
+\f1\b\fs60 \AppleTypeServices\AppleTypeServicesF65539 \cf2 What are micro frontends?\
+\pard\pardeftab720\sa300\partightenfactor0
+
+\f0\b0\fs38 \AppleTypeServices \cf2 \cb1 \uc0\u8232 \cb3 \
+The definition of micro frontends is: The idea of micro frontends is to extend the concepts of microservices to the frontend world.\
+The basic idea of micro frontends is to\
+splitting your frontend into a series of independently deployable and loosely collaborating frontend applications (called micro frontends). These micro frontends are then merged/bundled to create a single frontend application (see Figure 2). This bundling of micro frontends is discussed in paragraph 'Integration approaches micro frontends'.\
+The question is: How do you split the front-end applications?\
+You can show 1 micro-frontend per page and connect it with hyperlinks. Also is\
+it is possible to display multiple micro-frontends on a page (see figure 2).\
+\pard\pardeftab720\qc\partightenfactor0
+\cf2 \cb1 \
+\pard\pardeftab720\sa300\qc\partightenfactor0
+\cf2 \cb3 figure 2\
+\pard\pardeftab720\sa300\partightenfactor0
+\cf2 To speed up the development of an application, it is practical to think of the micro frontends as separate vertical segments (also called \'93verticals\'94) of a web app. Each \'93vertical\'94 is responsible for a single business domain/use case such as \'93Profile\'94, \'93Catalog\'94, \'93Order\'94. It has its own presentation layer, service layer (microservice), persistence layer and a separate database. From the development perspective, each vertical is implemented by one team.\
+Why does this speed up the development process? Each vertical team is focused on a business domain and therefore needs to coordinate less with other teams. Preferably no code is shared between the different verticals. This improves the speed of the development process. For simplicity, in this article we focus solely on the presentation layer of a vertical.\
+\pard\pardeftab720\sl720\sa100\partightenfactor0
+
+\f1\b\fs60 \AppleTypeServices\AppleTypeServicesF65539 \cf2 Sample application\
+\pard\pardeftab720\sa300\partightenfactor0
+
+\f0\b0\fs38 \AppleTypeServices \cf2 Below I describe an example application that uses micro-frontends. Imagine a website where customers can order food for delivery.\
+First, you have a landing page where customers can search and filter for restaurants. This micro frontend is used for this (see figure 4): micro front-end browse restaurants.\
+Each restaurant then has its own page on which the menu items are displayed and the customer can choose what he or she wants to eat (see figure 3). Micro front-end order food is used for this.\
+Finally, the customers have a profile page where they can see their order history, track the order\
+and customize their payment options. The micro-frontend-user-profile is used for this.\
+This sample application is used throughout the rest of the article.\
+\pard\pardeftab720\sa300\partightenfactor0
+\cf2 \cb1 \uc0\u8232 \cb3 \
+\pard\pardeftab720\qc\partightenfactor0
+\cf2 \cb1 \
+\pard\pardeftab720\sa300\qc\partightenfactor0
+\cf2 \cb3 figure 3\
+\pard\pardeftab720\sl720\sa100\partightenfactor0
+
+\f1\b\fs60 \AppleTypeServices\AppleTypeServicesF65539 \cf2 Architecture\
+\pard\pardeftab720\sa300\partightenfactor0
+
+\f0\b0\fs38 \AppleTypeServices \cf2 The architecture of this application is as follows:\
+\pard\tx220\tx720\pardeftab720\li720\fi-720\partightenfactor0
+\ls1\ilvl0\cf2 \kerning1\expnd0\expndtw0 \outl0\strokewidth0 {\listtext	\uc0\u8226 	}\expnd0\expndtw0\kerning0
+\outl0\strokewidth0 \strokec2 Several micro-frontends are shown per page.\cb1 \
+\ls1\ilvl0\cb3 \kerning1\expnd0\expndtw0 \outl0\strokewidth0 {\listtext	\uc0\u8226 	}\expnd0\expndtw0\kerning0
+\outl0\strokewidth0 \strokec2 A container application is used as the main entry point (see figure 4). This ensures, among other things:\cb1 \
+\ls1\ilvl0\cb3 \kerning1\expnd0\expndtw0 \outl0\strokewidth0 {\listtext	\uc0\u8226 	}\expnd0\expndtw0\kerning0
+\outl0\strokewidth0 \strokec2 Routing of requests and aggregating responses from the backend. Manages cross-cutting concerns such as authentication, authorization, logging, caching and navigation.\cb1 \
+\ls1\ilvl0\cb3 \kerning1\expnd0\expndtw0 \outl0\strokewidth0 {\listtext	\uc0\u8226 	}\expnd0\expndtw0\kerning0
+\outl0\strokewidth0 \strokec2 Brings the different (distributed) micro-frontends together on the page and determines which micro-frontend should be rendered where and when.\cb1 \
+\pard\pardeftab720\qc\partightenfactor0
+\cf2 \
+\pard\pardeftab720\partightenfactor0
+\cf2 \cb3 \'a0 \'a0 \'a0 \'a0 \'a0 \'a0 \'a0 \'a0 \'a0 \'a0 \'a0 \'a0 \'a0 \'a0 \'a0 \'a0 \'a0 \'a0 \'a0 \'a0 \'a0 \'a0 \'a0 \'a0 \'a0 \'a0 \'a0 \'a0 \'a0 \'a0 \'a0 \'a0 \'a0 \'a0 \'a0 \'a0 figure 4\
+\pard\pardeftab720\sl720\sa100\partightenfactor0
+
+\f1\b\fs60 \AppleTypeServices\AppleTypeServicesF65539 \cf2 Integration approaches micro-frontends\cb1 \
+\pard\pardeftab720\partightenfactor0
+
+\f0\b0\fs38 \AppleTypeServices \cf2 \cb3 \'a0 \'a0 \'a0 \'a0 \'a0 \'a0 \'a0 \'a0 \'a0 \'a0 \'a0 \'a0 \'a0 \'a0 \'a0 \'a0 \'a0 \'a0 \'a0 \'a0 \'a0 \'a0 \'a0 \'a0 \'a0 \'a0 \'a0 \'a0\
+\pard\pardeftab720\sa300\partightenfactor0
+\cf2 By 'integration approaches' is meant: How to 'bundle' the micro-frontends in the frontend. Figure 5 below lists three 'integration approaches'.\
+\pard\pardeftab720\qc\partightenfactor0
+\cf2 \cb1 \
+\pard\pardeftab720\sa300\qc\partightenfactor0
+\cf2 \cb3 figure 5\
+\pard\pardeftab720\sa300\qc\partightenfactor0
+\cf2 \cb1 \uc0\u8232 \cb3 \
+\pard\pardeftab720\sa300\partightenfactor0
+\cf2 \'a0 \'a0\'a0\
+\pard\pardeftab720\partightenfactor0
+\cf2 \'a0 \'a0 \'a0 \'a0 \'a0 \'a0 \'a0 \'a0 \'a0 \'a0 \'a0 \'a0 \'a0 \'a0 \'a0 \'a0 \'a0 \'a0 \'a0 \'a0 \'a0 \'a0 \'a0 \'a0 \'a0 \'a0 \'a0 \'a0 \'a0 \'a0 \'a0 \'a0 \'a0 \'a0 \'a0 \'a0\'a0\
+\pard\pardeftab720\sl720\sa100\partightenfactor0
+
+\f1\b\fs60 \AppleTypeServices\AppleTypeServicesF65539 \cf2 Build time integration \'a0 \'a0 \'a0 \'a0 \'a0 \'a0 \'a0 \'a0 \'a0 \'a0 \'a0 \'a0 \'a0 \'a0 \'a0 \'a0 \'a0 \'a0 \'a0 \'a0 \'a0 \'a0 \'a0 \'a0 \'a0 \'a0 \'a0\'a0\
+\pard\pardeftab720\sa300\partightenfactor0
+
+\f0\b0\fs38 \AppleTypeServices \cf2 For Build time integration, we publish each individual micro-frontend as a package. At Build time, these separate micro-frontends are bundled using a package.json of the container application.\
+A Monorepo is used for Build time integration. With a Monorepo you can manage all your code in multiple libraries within a repository. Libraries can consist of features, components, utilities or an ui kit. The idea of this Monorepo is that you can reuse all or part of your created features.\
+The big downside of a Monorepo is that we have to recompile and release each micro frontend in the Monorepo to release a change in a separate micro frontend! For example, to maintain a monorepo you can use Lerna, Nrwl or Angular Workplace.\
+\pard\pardeftab720\partightenfactor0
+\cf2 \'a0 \'a0 \'a0 \'a0 \'a0 \'a0 \'a0 \'a0 \'a0 \'a0 \'a0 \'a0 \'a0 \'a0 \'a0 \'a0 \'a0 \'a0 \'a0 \'a0 \'a0 \'a0 \'a0 \'a0\'a0\
+\pard\pardeftab720\sl720\sa100\partightenfactor0
+
+\f1\b\fs60 \AppleTypeServices\AppleTypeServicesF65539 \cf2 Server Side integration\cb1 \
+\pard\pardeftab720\partightenfactor0
+
+\f0\b0\fs38 \AppleTypeServices \cf2 \cb3 \'a0\
+SSI is rendering HTML on the server from multiple templates or fragments. These fragments represent the micro frontends. In the example below, an index. html, which uses server-side includes to include a snippet of HTML files (see Figure 6).\
+\pard\pardeftab720\qc\partightenfactor0
+\cf2 \cb1 \
+\pard\pardeftab720\qc\partightenfactor0
+\cf2 \cb3 \'a0 \'a0 \'a0 \'a0 \'a0 \'a0 \'a0 \'a0 \'a0 \'a0 \'a0 \'a0figure 6 \'a0 \'a0\
+\pard\pardeftab720\sa300\partightenfactor0
+\cf2 \'a0 \'a0\'a0\
+\pard\pardeftab720\partightenfactor0
+\cf2 \'a0 \'a0 \'a0 \'a0 \'a0 \'a0 \'a0 \'a0 \'a0 \'a0 \'a0 \'a0 \'a0 \'a0 \'a0 \'a0 \'a0 \'a0 \'a0 \'a0 \'a0 \'a0 \'a0 \'a0\'a0\
+\pard\pardeftab720\sl600\sa100\partightenfactor0
+
+\f1\b\fs50 \cf2 index.html\cb1 \
+\pard\pardeftab720\partightenfactor0
+
+\f0\b0\fs38 \cf2 \cb3 We serve this file with Nginx (see Figure 7), configuring the $PAGE variable by matching the url requested. So if the user chooses url '/browse', the $PAGE variable will be filled with HTML browsing fragment.\
+\'a0 \'a0 \'a0 \'a0 \'a0 \'a0 \'a0 \'a0 \'a0 \'a0 \'a0\
+\pard\pardeftab720\qc\partightenfactor0
+\cf2 \cb1 \
+\pard\pardeftab720\partightenfactor0
+\cf2 \cb3 figure 7\
+\pard\pardeftab720\sl600\sa100\partightenfactor0
+
+\f1\b\fs50 \cf2 Nginx\cb1 \
+\pard\pardeftab720\partightenfactor0
+
+\f0\b0\fs38 \cf2 \cb3 What is not shown here is how those various snippet HTML files end up on the web server. The assumption is that they each have their own build pipeline, allowing us to make changes to one snippet without affecting another page.\
+\'a0 \'a0 \'a0 \'a0 \'a0 \'a0 \'a0 \'a0 \'a0 \'a0 \'a0 \'a0 \'a0 \'a0 \'a0 \'a0 \'a0 \'a0 \'a0 \'a0 \'a0 \'a0 \'a0 \'a0\
+\pard\pardeftab720\sl600\sa100\partightenfactor0
+
+\f1\b\fs50 \cf2 Runtime integration\cb1 \
+\pard\pardeftab720\sa300\partightenfactor0
+
+\f0\b0\fs38 \cf2 \cb3 Runtime Integration is bundling and configuring the micro frontends in the frontend at Runtime (see figure 5). In this situation, a package.json is not used to bundle the individual micro frontends.\
+In the example below, Web Components are used as a technique for creating separate micro-frontends. These Web Components can also be used for the previous 'integration apps'.\
+\pard\pardeftab720\sl600\sa100\partightenfactor0
+
+\f1\b\fs50 \cf2 What are Web Components? \'a0 \'a0 \'a0 \'a0 \'a0 \'a0 \'a0 \'a0 \'a0 \'a0 \'a0 \'a0 \'a0 \'a0 \'a0 \'a0 \'a0\
+\pard\pardeftab720\sa300\partightenfactor0
+
+\f0\b0\fs38 \cf2 In short, Web Components are isolated components that you can (re)use in HTML pages and web applications. Web Components are also known as custom elements. As a developer you are able to write your own Custom Element, which is basically your own HTML element with its own CSS, HTML and Javascript. This element is based on web standards and can be used in the most commonly used browsers. Web Components are future-proof because they do not depend on a framework or library. And is therefore very suitable as a technique for building a micro-frontend.\
+\pard\pardeftab720\partightenfactor0
+\cf2 \'a0 \'a0 \'a0 \'a0 \'a0 \'a0 \'a0\
+\pard\pardeftab720\sl600\sa100\partightenfactor0
+
+\f1\b\fs50 \cf2 How to make a Web Component?\
+\pard\pardeftab720\partightenfactor0
+
+\f0\b0\fs38 \cf2 In this example we are going to create a Web Component ourselves from the 'order food' page (see figure 3) from our example application. The name of this Web Component is micro-front-order-food and in this example (see figure 8) has the following parameters: data-name, data-img and data-menu.\
+\pard\pardeftab720\qc\partightenfactor0
+\cf2 \cb1 \
+\pard\pardeftab720\sa300\qc\partightenfactor0
+\cf2 \cb3 \'a0 \'a0 figure 8\
+\pard\pardeftab720\sa300\partightenfactor0
+\cf2 The implementation of this Web Component looks like this (see Figure 9). To keep this example simple, the menu items have been omitted.\
+For this Web Component, we first define a class that extends HTMLElement.\
+With HTMLElement you can create a Custom HTML element. In the constructor, super() is called first, which means that all the logic of HTMLElement can be used to build a Web Component. Next, we attach a shadow DOM to the Web Component. A shadow DOM is an isolated DOM (or 'View') to display something for this Web Component.\
+We instantiate the desired image with document.create Element('img') and set the 'alt' and 'src' attributes using\
+the passed parameters data-name and data-img. Then the image is added to our shadow DOM with shadow.appendChild(img).\
+\pard\pardeftab720\qc\partightenfactor0
+\cf2 \cb1 \
+\pard\pardeftab720\sa300\qc\partightenfactor0
+\cf2 \cb3 figure 9\
+\pard\pardeftab720\sa300\partightenfactor0
+\cf2 And finally a new Custom Element / Web Component is defined with:\
+\pard\pardeftab720\partightenfactor0
+
+\f2\fs28 \cf4 \cb5 \strokec4 JavaScript\cb1 \
+\pard\pardeftab720\partightenfactor0
+
+\f3\i \cf4 \cb5 \'a0\cb1 \
+\pard\pardeftab720\sl371\partightenfactor0
+
+\f4\i0\fs26 \cf6 \cb7 \strokec6 customElements.define(\'91 micro-frontend-order-food\'92, MicroFrontendOrderFood)\
+\pard\pardeftab720\sa300\partightenfactor0
+
+\f0\fs38 \cf2 \cb3 \strokec2 This Web Component is called micro-frontend-order-food. We can use these in our HTML pages to display an image with a text.\
+\pard\pardeftab720\sl600\sa100\partightenfactor0
+
+\f1\b\fs50 \cf2 Example Runtime Integration with Web Components\
+\pard\pardeftab720\sa300\partightenfactor0
+
+\f0\b0\fs38 \cf2 An index.html is shown in figure 10 which simulates our sample application (ordering food). This index.html here represents the container application that, among other things, takes care of the routing and rendering of the micro-frontends. At the top, our micro frontends are included with a <script> tag. The micro-frontend-order-food just discussed is defined in the JavaScript bundle: https:// order.example.com/bundle.js\
+The <div id="micro-frontend-root"> is the placeholder where the selected micro-frontends are rendered. The constant webComponentsByRoute contains a lookup table for determining the web component / micro-frontend you want to render when you select a route.\
+The constant webComponentType contains the actual chosen micro frontend based on the selected route via: window. location.pathname\
+\pard\pardeftab720\qc\partightenfactor0
+\cf2 \cb1 \
+\pard\pardeftab720\sa300\qc\partightenfactor0
+\cf2 \cb3 figure 10\
+\pard\pardeftab720\sa300\partightenfactor0
+\cf2 Using document.createElement (web ComponentType) we instantiate the selected micro frontend. Finally, it is linked to the placeholder: <div id="micro-frontend-root">. This is done with root.appendChild(webComponent).\
+The above is clearly a primitive example, but it demonstrates the Runtime integration approach.\
+\pard\pardeftab720\sl720\sa100\partightenfactor0
+
+\f1\b\fs60 \AppleTypeServices\AppleTypeServicesF65539 \cf2 Which integration Approach to use?\
+\pard\pardeftab720\sa300\partightenfactor0
+
+\f0\b0\fs38 \AppleTypeServices \cf2 In the diagram in figure 11 you can deduce which integration approach you can use in which situation. For small and/or non-complex applications (where 1 or 2 teams are working on) you can ignore the integration approaches and just assume a frontend monolith.\
+\pard\pardeftab720\partightenfactor0
+\cf2 \'a0 \'a0 \'a0 \'a0 \'a0 \'a0 \'a0 \'a0 \'a0 \'a0 \'a0 \'a0 \'a0 \'a0 \'a0 \'a0 \'a0 \'a0 \'a0figure 11\'a0 \'a0 \'a0 \'a0 \'a0 \'a0\
+\pard\pardeftab720\sl720\sa100\partightenfactor0
+
+\f1\b\fs60 \AppleTypeServices\AppleTypeServicesF65539 \cf2 UI Component library\cb1 \
+\pard\pardeftab720\sa300\partightenfactor0
+
+\f0\b0\fs38 \AppleTypeServices \cf2 \cb3 A UI component library consists of a series of UI building blocks, such as input elements, lists, tab bars and grids etc.\
+You could choose to have each micro frontend its own UI Component library\
+to own (see figure 12). The downside of this is duplicate code and the potential for less consistency in the styling and operation of the UI components. For more consistency we can also apply a generic UI Component library. The disadvantage of this is that the micro-frontends are then linked through this library. If you choose a generic UI component, make sure it contains only UI logic and no company or domain logic. Placing domain logic in a shared library creates a high degree of dependency between the micro frontends.\
+figure 12\
+\pard\pardeftab720\sl720\sa100\partightenfactor0
+
+\f1\b\fs60 \AppleTypeServices\AppleTypeServicesF65539 \cf2 Communication between micro frontends\
+\pard\pardeftab720\sa300\partightenfactor0
+
+\f0\b0\fs38 \AppleTypeServices \cf2 One of the most frequently asked questions about micro frontends is how to make them communicate with each other. It is generally recommended that the micro frontends communicate as little as possible as this introduces an unwanted link that we are trying to avoid in the first place. That said, a certain amount of communication between micro frontends is often required. Custom events allow micro-frontends to communicate indirectly, which is a great way to establish direct link\
+to minimize. Events can be created with the 'Event constructor' as follows: New Event('build') (see figure 13).\
+For example, the dispatch event can be initiated in micro frontend X to dispatch an event called build. Micro-frontend Y then listens for this event (using the addEventListener method) and handles further processing.\
+\pard\pardeftab720\qc\partightenfactor0
+\cf2 \cb1 \
+\pard\pardeftab720\sa300\qc\partightenfactor0
+\cf2 \cb3 figure 13\
+\pard\pardeftab720\sl720\sa100\partightenfactor0
+
+\f1\b\fs60 \AppleTypeServices\AppleTypeServicesF65539 \cf2 Conclusion micro frontends\
+\pard\pardeftab720\sa300\partightenfactor0
+
+\f0\b0\fs38 \AppleTypeServices \cf2 Micro frontends are all about breaking up a large web app into Verticals. Our technology choices, our codebases, our teams\
+and our release processes (CI/CD) can ideally all work and evolve independently of each other, without excessive coordination between other teams. This architecture also has a downside. An article could be written about the disadvantages. Here we mention a few:\
+If you want to make a change to the entire web app, you need to make changes to the individual micro-frontends (and microservices) implemented by various other teams.\
+For integration testing of the entire web app, you have to start many different applications and servers. The difficulty lies in testing the dependencies and communication between the (distributed) micro-frontends.\
+Independently built micro frontends can contain duplicate code. This increases the number of bytes that we need to send to our end users over the network. Duplicate code also means more maintenance, more chance of errors, and less consistency in the styling and operation of the UI components.\
+In addition, there are many practical cases in which micro frontends offer advantages. Large organizations like Spotify or IKEA have succeeded in gradually applying micro-frontends over time to both old and new codebases. With micro-frontends, these companies can respond more quickly to changes in the market and deliver customer experiences that drive their brands forward.\
+}
